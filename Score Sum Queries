@@ -1,0 +1,57 @@
+
+using System;
+class Practice
+{
+    static void Main(string[] args)
+    {
+        int N = int.Parse(Console.ReadLine());
+
+        int[]C = new int[N+1];
+        int[]P = new int[N+1];
+
+        int[]sum1 = new int[N+1];
+        int[]sum2 = new int[N+1];
+
+        sum1[0] = 0;
+        sum2[0] = 0;
+
+        for (int i = 1; i < N + 1; i++)
+        {
+            string[] strings1 = Console.ReadLine().Split(' ');
+            C[i] = int.Parse(strings1[0]);
+            P[i] = int.Parse(strings1[1]);
+            if (C[i] == 1)
+            {
+                sum1[i] = sum1[i - 1] + P[i];
+                sum2[i] = sum2[i - 1];
+            }
+            else if (C[i] == 2)
+            {
+                sum1[i] = sum1[i - 1];
+                sum2[i] = sum2[i - 1] + P[i];
+            }
+        }
+
+        int Q =int.Parse(Console.ReadLine());
+
+        int[]L = new int[Q+1];
+        int[]R = new int[Q+1];
+
+        for(int i = 1;i < Q+1;i++)
+        {
+            string[] strings2 = Console.ReadLine().Split(' ');
+            L[i] = int.Parse(strings2[0]);
+            R[i] = int.Parse(strings2[1]);
+        }
+
+        for(int k = 1; k <= Q; k++)
+        {
+            int total1=0;
+            int total2=0;
+            total1 = sum1[R[k]] - sum1[L[k]-1];
+            total2 = sum2[R[k]] - sum2[L[k]-1];
+            Console.Write(total1 + " " + total2);
+            Console.WriteLine();
+        }
+    }
+}
